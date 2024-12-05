@@ -70,7 +70,7 @@ jobs:
         file: ./app/Dockerfile
         builder: ${{ steps.buildx.outputs.name }}
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/hello-gitops:latest
+        tags: ${{ secrets.DOCKER_USERNAME }}/hello-gitops:${{ github.sha }}, ${{ secrets.DOCKER_USERNAME }}/hello-gitops:latest
         platforms: linux/amd64,linux/arm64
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache
