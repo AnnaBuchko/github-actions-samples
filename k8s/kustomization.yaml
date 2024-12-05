@@ -7,5 +7,5 @@ resources:
 namespace: hello-gitops
 images:
 - name: hello-gitops
-  newName: elisska/hello-gitops
-  newTag: c231f4bf738535df912638b2f42b820fe250d0a6
+  newName: annabuchko/hello-gitops
+  newTag: 7e2c5f0e82022fef40eff3c4b05cd669f657b6cc
