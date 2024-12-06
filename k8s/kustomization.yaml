@@ -8,4 +8,4 @@ namespace: hello-gitops
 images:
 - name: hello-gitops
   newName: annabuchko/hello-gitops
-  newTag: 6038ca9948bf95dd233617458271d2107af2dca7
+  newTag: 0078559c28b9ec48e18b9bf28762f3e152f42253
