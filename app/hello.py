@@ -6,10 +6,10 @@ config.read('config.properties')
 
 app = Flask(__name__)
 
-if config.getboolean("features", "feature_2") == True:
+if config.getboolean("features", "feature_1") == True:
 	message = "Hello, ArgoCD! \n"
 else:
-	message = "Hello, World! \n"
+	message = "Hello, ArgoCD World! \n"
 
 @app.route("/")
 def hello():
