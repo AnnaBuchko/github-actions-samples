@@ -111,7 +111,18 @@ jobs:
       run: |
         gcloud container clusters get-credentials "$GKE_CLUSTER" --region "$GKE_REGION"
 
-    - name: Create namespace & set in Kustomize
+    - name: Check and Install ArgoCD
+      run: |
+        if kubectl get ns | grep -q "^argocd "; then
+          echo "ArgoCD is already installed. Skipping installation."
+        else
+          echo "Installing ArgoCD..."
+          kubectl create namespace argocd
+          kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+          echo "ArgoCD installation complete."
+        fi
+
+    - name: Create namespace for deployment & set in Kustomize
       run: |
          namespacePresentBlue=`kubectl get ns | grep python-app-blue | wc -l`
          namespacePresentGreen=`kubectl get ns | grep python-app-green | wc -l`
@@ -156,11 +167,6 @@ jobs:
     - name: Deploy updated Kubernetes resources
       run: |
         kubectl apply -k k8s/ 
-   
-    # DO SOME CHECKS HERE BEFORE COMMIT
-    #- name: Deploy updated Kubernetes resources
-    #  run: |
-    #    kubectl apply -k k8s/
 
     # REMOVE OLD DEPLOYMENT!!
     - name: Remove old namespace
